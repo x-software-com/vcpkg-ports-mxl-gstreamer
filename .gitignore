@@ -1,0 +1,6 @@
+# Ignore backupfiles from merge conflicts.
+*.orig
+
+# Ignore vscode/vscodium settings, except for extensions.json.
+.vscode/*
+!.vscode/extensions.json
