@@ -1,0 +1,17 @@
+diff --git a/subprojects/gst-plugins-good/gst/matroska/matroska-mux.c b/subprojects/gst-plugins-good/gst/matroska/matroska-mux.c
+index e2436d6c0c..b0a5f977d3 100644
+--- a/subprojects/gst-plugins-good/gst/matroska/matroska-mux.c
++++ b/subprojects/gst-plugins-good/gst/matroska/matroska-mux.c
+@@ -3440,6 +3440,12 @@ gst_matroska_tag_conv[] = {
+       GST_MATROSKA_TAG_ID_COMPOSER, GST_TAG_COMPOSER}, {
+       GST_MATROSKA_TAG_ID_LEAD_PERFORMER, GST_TAG_PERFORMER}, {
+       GST_MATROSKA_TAG_ID_GENRE, GST_TAG_GENRE}
++      ,{"GEOMETRY", "GEOMETRY"}
++      ,{"SOURCE_ID", "SOURCE_ID"}
++      ,{"NEXT_UUID", "NEXT_UUID"}
++      ,{"CURRENT_UUID", "CURRENT_UUID"}
++      ,{"PREVIOUS_UUID", "PREVIOUS_UUID"}
++      ,{"RECORDER_MACHINE_ID", "RECORDER_MACHINE_ID"}
+ };
+ 
+ /* Every stagefright implementation on android up to and including 6.0.1 is using
