@@ -1,0 +1,13 @@
+diff --git a/subprojects/gst-plugins-good/gst/matroska/matroska-demux.c b/subprojects/gst-plugins-good/gst/matroska/matroska-demux.c
+index 5567e9fb2d..d82dae2fb8 100644
+--- a/subprojects/gst-plugins-good/gst/matroska/matroska-demux.c
++++ b/subprojects/gst-plugins-good/gst/matroska/matroska-demux.c
+@@ -3170,7 +3170,7 @@ next:
+       gst_event_set_seqnum (flush_event, seqnum);
+       gst_pad_push_event (demux->common.sinkpad, flush_event);
+     }
+-    entry = gst_matroska_demux_search_pos (demux, seekpos);
++    entry = gst_matroska_demux_search_pos (demux, 0);
+     /* keep local copy */
+     if (entry) {
+       scan_entry = *entry;
