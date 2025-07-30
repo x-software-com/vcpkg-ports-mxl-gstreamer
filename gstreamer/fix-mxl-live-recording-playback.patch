@@ -1,0 +1,84 @@
+diff --git a/subprojects/gst-plugins-bad/gst-libs/gst/play/gstplay.c b/subprojects/gst-plugins-bad/gst-libs/gst/play/gstplay.c
+index 8566f6b27a..be28e0cc97 100644
+--- a/subprojects/gst-plugins-bad/gst-libs/gst/play/gstplay.c
++++ b/subprojects/gst-plugins-bad/gst-libs/gst/play/gstplay.c
+@@ -861,6 +861,34 @@ tick_cb (gpointer user_data)
+   return G_SOURCE_CONTINUE;
+ }
+ 
++static void
++on_duration_changed (GstPlay * self, GstClockTime duration)
++{
++  gboolean updated = FALSE;
++
++  if (self->cached_duration == duration)
++    return;
++
++  GST_DEBUG_OBJECT (self, "Duration changed %" GST_TIME_FORMAT,
++      GST_TIME_ARGS (duration));
++
++  g_mutex_lock (&self->lock);
++  self->cached_duration = duration;
++  if (self->media_info) {
++    self->media_info->duration = duration;
++    updated = TRUE;
++  }
++  g_mutex_unlock (&self->lock);
++
++  api_bus_post_message (self, GST_PLAY_MESSAGE_DURATION_CHANGED,
++      GST_PLAY_MESSAGE_DATA_DURATION, GST_TYPE_CLOCK_TIME,
++      gst_play_get_duration (self), NULL);
++
++  if (updated) {
++    on_media_info_updated (self);
++  }
++}
++
+ /*
+  * Returns true when position is queried and differed from cached position.
+  * Sets position to cached value, and to queried value if position can be queried
+@@ -878,6 +906,9 @@ query_position (GstPlay * self, GstClockTime * position)
+         GST_TIME_ARGS (current_position));
+     if (self->cached_position != current_position) {
+       self->cached_position = current_position;
++      if (self->cached_position > self->cached_duration) {
++        on_duration_changed(self, self->cached_position);
++      }
+       *position = (GstClockTime) current_position;
+       return TRUE;
+     }
+@@ -1381,34 +1412,6 @@ notify_caps_cb (G_GNUC_UNUSED GObject * object,
+   check_video_dimensions_changed (self);
+ }
+ 
+-static void
+-on_duration_changed (GstPlay * self, GstClockTime duration)
+-{
+-  gboolean updated = FALSE;
+-
+-  if (self->cached_duration == duration)
+-    return;
+-
+-  GST_DEBUG_OBJECT (self, "Duration changed %" GST_TIME_FORMAT,
+-      GST_TIME_ARGS (duration));
+-
+-  g_mutex_lock (&self->lock);
+-  self->cached_duration = duration;
+-  if (self->media_info) {
+-    self->media_info->duration = duration;
+-    updated = TRUE;
+-  }
+-  g_mutex_unlock (&self->lock);
+-
+-  api_bus_post_message (self, GST_PLAY_MESSAGE_DURATION_CHANGED,
+-      GST_PLAY_MESSAGE_DATA_DURATION, GST_TYPE_CLOCK_TIME,
+-      gst_play_get_duration (self), NULL);
+-
+-  if (updated) {
+-    on_media_info_updated (self);
+-  }
+-}
+-
+ static void
+ on_seek_done (GstPlay * self)
+ {

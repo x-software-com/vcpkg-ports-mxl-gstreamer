@@ -6,6 +6,7 @@ vcpkg_from_gitlab(
     SHA512 0f5f20295d3a0077a9b8cbc8ff3a9b228b1c5f2b3cc157f0b49ae110772d0d64a61ef3ca1479ac2f1b4943ccd25558de7c6a8151bc50c884679b75dbf4b300e0
     HEAD_REF main
     PATCHES
+        fix-mxl-live-recording-playback.patch
         fix-mxl-bad-file-seek.patch
         fix-mxl-matroska-meta.patch
         fix-mxl-matroska-tags.patch
