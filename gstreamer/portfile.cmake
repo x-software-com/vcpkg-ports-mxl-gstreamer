@@ -10,8 +10,6 @@ vcpkg_from_gitlab(
         fix-mxl-bad-file-seek.patch
         fix-mxl-matroska-meta.patch
         fix-mxl-matroska-tags.patch
-        fix-mxl-rfb-version.patch
-        fix-mxl-ximagesrc-zero-fps.patch
         fix-mxl-cuda-ctx-flags.patch
         fix-mxl-compositor-seeking.patch
         fix-mxl-gst-play-seek.patch
