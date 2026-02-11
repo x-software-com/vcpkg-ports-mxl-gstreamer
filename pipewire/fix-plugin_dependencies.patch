@@ -1,0 +1,13 @@
+diff --git a/src/modules/meson.build b/src/modules/meson.build
+index be9912dd6..9e7d45724 100644
+--- a/src/modules/meson.build
++++ b/src/modules/meson.build
+@@ -98,7 +98,7 @@ pipewire_module_echo_cancel = shared_library('pipewire-module-echo-cancel',
+   install : true,
+   install_dir : modules_install_dir,
+   install_rpath: modules_install_dir,
+-  dependencies : [mathlib, dl_lib, pipewire_dep, plugin_dependencies],
++  dependencies : [mathlib, dl_lib, pipewire_dep],
+ )
+ 
+ build_module_jack_tunnel = jack_dep.found()

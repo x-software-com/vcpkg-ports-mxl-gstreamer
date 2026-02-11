@@ -3,15 +3,17 @@ vcpkg_from_gitlab(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO pipewire/pipewire
     REF "${VERSION}"
-    SHA512 d861f55b199ddf5683374bbc2129fc4c370a3834d6d7fea0e66c5b2af7e13fb30a29c3aaa91207511581e03ac690b849619b820bec468295de3f918d14e0c3cb
+    SHA512 15d5383b307c6a33e221a1f3b13e1a6b182e1826f419420654e25c5db2daf3793b094f816604bda9fa03abe6dff66c12dad98637edab67ca5966bbb8c57ea4ad
     HEAD_REF master # branch name
+    PATCHES
+        fix-plugin_dependencies.patch
 )
 
 vcpkg_configure_meson(
     SOURCE_PATH "${SOURCE_PATH}"
     OPTIONS
         -Dalsa=disabled
-        -Daudioconvert=enabled
+        -Daudioconvert=disabled
         -Daudiomixer=disabled
         -Daudiotestsrc=disabled
         -Davb=disabled
@@ -53,8 +55,8 @@ vcpkg_configure_meson(
         -Droc=disabled
         -Dsdl2=disabled
         -Dsndfile=disabled
-        -Dspa-plugins=enabled # This one must be enabled or the resulting build won't be able to connect to pipewire daemon
-        -Dsupport=enabled # This one must be enabled or the resulting build won't be able to connect to pipewire daemon
+        -Dspa-plugins=disabled # This one must be enabled or the resulting build won't be able to connect to pipewire daemon
+        -Dsupport=disabled # This one must be enabled or the resulting build won't be able to connect to pipewire daemon
         -Dsystemd-system-service=disabled
         -Dsystemd-system-unit-dir=disabled
         -Dsystemd-user-service=disabled
