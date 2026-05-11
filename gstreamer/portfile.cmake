@@ -3,7 +3,7 @@ vcpkg_from_gitlab(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO gstreamer/gstreamer
     REF "${VERSION}"
-    SHA512 c9079baf7e0d53dfd811e25a8070dacf0b8b582425144ab22e4df5c89af4533500f4828439b426a442c59a481e07904588a681e0cfb4e32911de32519db56db7
+    SHA512 77a09f47ad534dcf4bf742b2232c204fa4f4e6fcbe30b3abd1979436028acac940bd728a0df9e1e542f8ec756f5b6a187e3a117dbdc34d9bfc6024134be06e9b
     HEAD_REF main
     PATCHES
         fix-mxl-live-recording-playback.patch
@@ -182,7 +182,6 @@ vcpkg_configure_meson(
         -Ddevtools=disabled
         -Drtsp_server=disabled
         -Drs=disabled
-        -Dvaapi=auto # VAAPI is only available on x86 Linux, but not on AArch64
         -Dgst-examples=disabled
         # Bindings
         -Dpython=disabled

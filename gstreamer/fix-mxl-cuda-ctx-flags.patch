@@ -1,8 +1,8 @@
 diff --git a/subprojects/gst-plugins-bad/gst-libs/gst/cuda/gstcudacontext.cpp b/subprojects/gst-plugins-bad/gst-libs/gst/cuda/gstcudacontext.cpp
-index efc7d50157..e583dc5e2e 100644
+index 495295d9c6..70f379e651 100644
 --- a/subprojects/gst-plugins-bad/gst-libs/gst/cuda/gstcudacontext.cpp
 +++ b/subprojects/gst-plugins-bad/gst-libs/gst/cuda/gstcudacontext.cpp
-@@ -256,7 +256,7 @@ init_cuda_ctx (void)
+@@ -374,7 +374,7 @@ init_cuda_ctx (void)
  
  /* *INDENT-OFF* */
  static gboolean
@@ -11,7 +11,7 @@ index efc7d50157..e583dc5e2e 100644
  {
    CUcontext cuda_ctx;
    CUdevice cdev = 0, cuda_dev = -1;
-@@ -299,7 +299,7 @@ gst_create_cucontext (guint * device_id, CUcontext * context)
+@@ -417,7 +417,7 @@ gst_create_cucontext (guint * device_id, CUcontext * context)
      return FALSE;
    }
  
@@ -20,7 +20,7 @@ index efc7d50157..e583dc5e2e 100644
      GST_WARNING ("Failed to create CUDA context for cuda device %d", cuda_dev);
      return FALSE;
    }
-@@ -424,7 +424,36 @@ gst_cuda_context_new (guint device_id)
+@@ -544,7 +544,36 @@ gst_cuda_context_new (guint device_id)
    CUcontext ctx;
    GstCudaContext *self;
  
@@ -59,16 +59,16 @@ index efc7d50157..e583dc5e2e 100644
    }
  
 diff --git a/subprojects/gst-plugins-bad/gst-libs/gst/cuda/gstcudacontext.h b/subprojects/gst-plugins-bad/gst-libs/gst/cuda/gstcudacontext.h
-index e62df38d4d..a2887df356 100644
+index b123c79c27..54cdd87bb8 100644
 --- a/subprojects/gst-plugins-bad/gst-libs/gst/cuda/gstcudacontext.h
 +++ b/subprojects/gst-plugins-bad/gst-libs/gst/cuda/gstcudacontext.h
 @@ -74,6 +74,9 @@ GType            gst_cuda_context_get_type    (void);
  GST_CUDA_API
- GstCudaContext * gst_cuda_context_new         (guint device_id);
+ GstCudaContext * gst_cuda_context_new         (guint device_id) G_GNUC_WARN_UNUSED_RESULT;
  
 +GST_CUDA_API
-+GstCudaContext * gst_cuda_context_new_with_flags (guint device_id, guint ctx_flags);
++GstCudaContext * gst_cuda_context_new_with_flags (guint device_id, guint ctx_flags) G_GNUC_WARN_UNUSED_RESULT;
 +
  GST_CUDA_API
- GstCudaContext * gst_cuda_context_new_wrapped (CUcontext handler, CUdevice device);
+ GstCudaContext * gst_cuda_context_new_wrapped (CUcontext handler, CUdevice device) G_GNUC_WARN_UNUSED_RESULT;
  
