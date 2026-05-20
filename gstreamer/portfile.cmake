@@ -3,7 +3,7 @@ vcpkg_from_gitlab(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO gstreamer/gstreamer
     REF "${VERSION}"
-    SHA512 77a09f47ad534dcf4bf742b2232c204fa4f4e6fcbe30b3abd1979436028acac940bd728a0df9e1e542f8ec756f5b6a187e3a117dbdc34d9bfc6024134be06e9b
+    SHA512 5589c7aefa596a46245710bc29b72182c306be5d992466ed65c923166349860245af5f113c4568843b167a3dde2eb2a35ff1ac8e379726157be31a50c960b12f
     HEAD_REF main
     PATCHES
         fix-mxl-live-recording-playback.patch
